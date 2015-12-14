@@ -1,0 +1,15 @@
+require 'action_view'
+require 'action_pack'
+
+namespace :swagger do
+  desc "generate swagger spec"
+  task :gen, ['env'] do |_, args|
+    lookup_context = ActionView::LookupContext.new('/views')
+    lookup_context.cache = false   # ActionPack を読まなくて済む魔法
+
+    view_context = ActionView::Base.new(lookup_context)
+    view_context.assign(env: args.env)
+    rendered = view_context.render(template: 'swagger.yml', prefixes: '')
+    File.write(File.join('/gen', "swagger.yml"), rendered)
+  end
+end
