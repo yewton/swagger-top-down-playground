@@ -1,0 +1,37 @@
+general:
+  branches:
+    ignore:
+      - gh-pages
+      - heroku
+
+machine:
+  timezone: Asia/Tokyo
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - git config --global user.name "CircleCI"
+    - git config --global user.email "circleci@example.com"
+
+test:
+  override:
+    - 'true'
+
+deployment:
+  publish:
+    branch: master
+    commands:
+      - ./api-doc/build.sh
+      - git checkout gh-pages
+      - cp -rp api-doc/target/production/html/* ./
+      - git add --force index.html main.css
+      - git commit -m '[ci skip]update gh-pages' --allow-empty
+      - git push origin gh-pages
+      - git checkout heroku
+      - cp -rp api-doc/target/production/server/* ./
+      - sed -i -e 's/8080/process.env.PORT || 8080/' index.js
+      - sed -i -e 's/localhost:8080/yewton-swagger-playground.herokuapp.com/' api/swagger.json
+      - git add --force Procfile api/ controllers/ index.js package.json
+      - git commit -m '[ci skip]update heroku' --allow-empty
+      - git push origin heroku
