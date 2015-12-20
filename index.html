@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="main.css">
+    <title>Swagger☆ペットショップ (本番)</title>
+</head>
+<body>
+<div class="container">
+    <h1>Swagger☆ペットショップ (本番)</h1>
+    <p><p>これはペットショップサーバの例です。</p>
+    <p><a href="http://swagger.io">Swaggerについてもっと知る</a>、あるいは irc.freenode.net の IRC チャンネル <code>#swagger</code> に参加しましょう。</p>
+    <p>この例では、認可フィルタの確認用に <code>special-key</code> という API キーを利用できます。</p>
+    <p>本番環境用の追加の説明文です。</p>
+    </p>
+    
+    
+        <div id="sw-default-consumes" class="sw-default-value">
+            <span class="sw-default-value-header">デフォルトリクエスト Content-Type:</span>
+            application/json
+        </div>
+        <div id="sw-default-produces" class="sw-default-value">
+            <span class="sw-default-value-header">デフォルトレスポンス Content-Type:</span>
+            application/json
+        </div>
+    
+    <div id="sw-schemes" class="sw-default-value">
+        <span class="sw-default-value-header">スキーマ:</span>
+        http
+    </div>
+    
+        
+        <h2 id="swagger--summary-tags">概要</h2>
+            <h3 id="tag-pet" class="swagger-summary-tag">タグ: pet</h3>
+            <p>Pets operations</p>
+        
+            <table class="table table-bordered table-condensed swagger--summary">
+                <thead>
+                <tr>
+                    <th>オペレーション</th>
+                    <th>説明</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+            <h3 id="tag-default" class="swagger-summary-tag">タグ: default</h3>
+            <p></p>
+        
+            <table class="table table-bordered table-condensed swagger--summary">
+                <thead>
+                <tr>
+                    <th>オペレーション</th>
+                    <th>説明</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#operation--pets-get">GET /pets</a></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--pets-post">POST /pets</a></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--pets--id--get">GET /pets/{id}</a></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--pets--id--delete">DELETE /pets/{id}</a></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        
+    
+    
+        <h2>セキュリティ</h2>
+    
+            <div id="security-definition-api_key" class="panel panel-security-definition panel-security-definition-apiKey">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="security-name">api_key</span> <strong><span class="sw-security-definition-apiKey"></span></strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-security-properties">
+                            <dt>
+                            </dt>
+                            <dt>
+                                    <span class="security-property-name">name:</span>
+                                    <span class="security-property-type">api_key</span>
+                            </dt>
+                            <dt>
+                                    <span class="security-property-name">in:</span>
+                                    <span class="security-property-type">header</span>
+                            </dt>
+                    </section>
+                </div>
+            </div>
+            <div id="security-definition-petstore_auth" class="panel panel-security-definition panel-security-definition-oauth2">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><span class="security-name">petstore_auth</span> <strong><span class="sw-security-definition-oauth2"></span></strong></h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-security-properties">
+                            <dt>
+                            </dt>
+                            <dt>
+                                    <span class="security-property-name">authorizationUrl:</span>
+                                    <span class="security-property-type">http://swagger.io/api/oauth/dialog</span>
+                            </dt>
+                            <dt>
+                                    <span class="security-property-name">flow:</span>
+                                    <span class="security-property-type">implicit</span>
+                            </dt>
+                            <dt>
+                                    <span class="security-property-name">scopes:</span>
+                                    <span class="security-property-type">[object Object]</span>
+                            </dt>
+                    </section>
+                </div>
+            </div>
+    
+    <h2>パス</h2>
+    
+        
+        <span id="path--pets"></span>
+            <div id="operation--pets-get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary"></div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">GET</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/pets</strong>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Returns <strong>all</strong> pets from the system that the user has access to.</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><code>tags</code></td>
+                                            <td><p>tags to filter by</p>
+                                        </td>
+                                            <td>query</td>
+                                            <td><span class="json-property-type">string[]</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                        <span class="sw-param-collection-format">, 
+                                                        comma separated (<code>tags=aaa,bbb</code>)
+                                                    </span>    </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>limit</code></td>
+                                            <td><p>maximum number of results to return</p>
+                                        </td>
+                                            <td>query</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><span class="label label-default">application/json</span> <span class="label label-default">application/xml</span> <span class="label label-default">text/xml</span> <span class="label label-default">text/html</span> 
+                    </p>
+                    
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>pet response</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                            
+                                                                            <section class="json-schema-array-items">
+                                                                                <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Pet">Pet</a>
+                                                                                </span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                                <div class="json-inner-schema">
+                                                                                    
+                                                                                </div>
+                                                                            </section>    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/ErrorModel">ErrorModel</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+            <div id="operation--pets-post" class="swagger--panel-operation-post panel">
+                <div class="panel-heading">
+                    <div class="operation-summary"></div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">POST</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/pets</strong>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Creates a new pet in the store.  Duplicates are allowed</p>
+            
+                    </section>
+                        
+                            <section class="sw-request-body">
+                                
+                                    <p><a href="#sw-default-consumes">デフォルト Content-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                    </p>
+                                                <div class="row">
+                                            <div class="col-md-6">
+                                                <p><p>Pet to add to the store</p>
+                        </p>
+                                            </div>
+                                            <div class="col-md-6 sw-request-model">
+                            <div  class="panel panel-definition">
+                                <div class="panel-body">
+                                            <a class="json-schema-ref" href="#/definitions/NewPet">NewPet</a>
+                                </div>
+                            </div></div>
+                                        </div>
+                            </section>
+                    
+                    
+                        <section class="sw-responses">
+                                <p><span class="label label-default">application/json</span> 
+                    </p>
+                    
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>pet response</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Pet">Pet</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/ErrorModel">ErrorModel</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+        
+        <span id="path--pets--id-"></span>
+            <div id="operation--pets--id--delete" class="swagger--panel-operation-delete panel">
+                <div class="panel-heading">
+                    <div class="operation-summary"></div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">DELETE</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/pets/{id}</strong>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>deletes a single pet based on the ID supplied</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><code>id</code></td>
+                                            <td><p>ID of pet to delete</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">デフォルトのContent-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-204">
+                                        204 No Content
+                                    
+                                    </dt>
+                                    <dd class="sw-response-204">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>pet deleted</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>
+                                    </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/ErrorModel">ErrorModel</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+            <div id="operation--pets--id--get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary"></div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">GET</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/pets/{id}</strong>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>Returns a user based on a single ID, if the user does not have access to the pet</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><code>id</code></td>
+                                            <td><p>ID of pet to fetch</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><span class="label label-default">application/json</span> <span class="label label-default">application/xml</span> <span class="label label-default">text/xml</span> <span class="label label-default">text/html</span> 
+                    </p>
+                    
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>pet response</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/Pet">Pet</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>unexpected error</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/ErrorModel">ErrorModel</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
+                        </section>
+                        <section class="sw-request-security">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-request-security-schema"></th>
+                                    <th class="sw-request-security-scopes"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><a href="#security-definition-api_key">api_key</a></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#security-definition-petstore_auth">petstore_auth</a></td>
+                                            <td>
+                                                    write:pets
+                                                    , read:pets
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                </div>
+            </div>
+    
+    
+    
+                       
+        <h2>スキーマ定義</h2>
+    
+            
+                <div id="definition-ErrorModel" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/ErrorModel"></a>ErrorModel:
+                                    <span class="json-property-type"><span class="json-property-type">object</span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                            
+                                <section class="json-schema-properties">
+                                    <dl>
+                                            <dt data-property-name="code">
+                                                <span class="json-property-name">code:</span>
+                                                <span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                                <span class="json-property-range" title="Value limits"></span>
+                                                
+                                                    <span class="json-property-required"></span>
+                                            </dt>
+                                            <dd>
+                                                
+                                                <div class="json-inner-schema">
+                                                    
+                                                </div>
+                                            </dd>
+                                            <dt data-property-name="message">
+                                                <span class="json-property-name">message:</span>
+                                                <span class="json-property-type">string</span>
+                                                <span class="json-property-range" title="Value limits"></span>
+                                                
+                                                    <span class="json-property-required"></span>
+                                            </dt>
+                                            <dd>
+                                                
+                                                <div class="json-inner-schema">
+                                                    
+                                                </div>
+                                            </dd>
+                                    </dl>
+                                </section>
+                    </div>
+                </div>        
+                <div id="definition-NewPet" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/NewPet"></a>NewPet:
+                                    <span class="json-property-type"><span class="json-property-type">object</span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>新規ペット</p>
+                            
+                                </section>
+                            
+                                <section class="json-schema-properties">
+                                    <dl>
+                                            <dt data-property-name="name">
+                                                <span class="json-property-name">name:</span>
+                                                <span class="json-property-type">string</span>
+                                                <span class="json-property-range" title="Value limits"></span>
+                                                
+                                                    <span class="json-property-required"></span>
+                                            </dt>
+                                            <dd>
+                                                <p>名前</p>
+                                
+                                                <div class="json-inner-schema">
+                                                    
+                                                </div>
+                                            </dd>
+                                            <dt data-property-name="colors">
+                                                <span class="json-property-name">colors:</span>
+                                                <span class="json-property-type">string[]</span>
+                                                <span class="json-property-range" title="Value limits"></span>
+                                                
+                                            </dt>
+                                            <dd>
+                                                <p>色</p>
+                                
+                                                <div class="json-inner-schema">
+                                                    
+                                                                    <section class="json-schema-array-items">
+                                                                        <span class="json-property-type">string</span>
+                                                                        <span class="json-property-range" title="Value limits"></span>
+                                                                        
+                                                                        <div class="json-inner-schema">
+                                                                            
+                                                                        </div>
+                                                                    </section>                </div>
+                                            </dd>
+                                    </dl>
+                                </section>
+                    </div>
+                </div>        
+                <div id="definition-Pet" class="panel panel-definition">
+                        <div class="panel-heading">
+                                <h3 class="panel-title"><a name="/definitions/Pet"></a>Pet:
+                                    <span class="json-property-type"><span class="json-property-type"></span>
+                <span class="json-property-range" title="Value limits"></span>
+                
+                </span>
+                                </h3>
+                        </div>
+                    <div class="panel-body">
+                                <section class="json-schema-description">
+                                    <p>ペットエンティティ</p>
+                            
+                                </section>
+                            
+                                <section class="json-schema-allOf">
+                                    <section class="json-schema-allOf-inherited">
+                                        <ul>
+                                                    <a class="json-schema-ref" href="#/definitions/NewPet">NewPet</a>
+                                        </ul>
+                                    </section>
+                                    <section class="json-schema-allOf-additional">
+                                                
+                                                    <section class="json-schema-properties">
+                                                        <dl>
+                                                                <dt data-property-name="id">
+                                                                    <span class="json-property-name">id:</span>
+                                                                    <span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
+                                                                    <span class="json-property-range" title="Value limits"></span>
+                                                                    
+                                                                        <span class="json-property-required"></span>
+                                                                </dt>
+                                                                <dd>
+                                                                    <p>識別子</p>
+                                                    
+                                                                    <div class="json-inner-schema">
+                                                                        
+                                                                    </div>
+                                                                </dd>
+                                                        </dl>
+                                                    </section>
+                                    </section>
+                                </section>
+                    </div>
+                </div></div>
+</body>
+</html>
