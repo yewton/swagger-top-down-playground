@@ -1,6 +1,0 @@
-source 'https://rubygems.org'
-
-gem 'actionview', '~> 4.2', '>= 4.2.5'
-gem 'actionpack', '~> 4.2', '>= 4.2.5'
-gem 'rake', '~> 10.4', '>= 10.4.2'
-gem 'swagger-blocks', '~> 1.2'
