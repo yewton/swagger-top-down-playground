@@ -49,10 +49,10 @@ module.exports.createUser = function createUser (req, res, next) {
 };
 
 module.exports.getUserByName = function getUserByName (req, res, next) {
-  var username = req.swagger.params['username'].value;
+  var name = req.swagger.params['name'].value;
   
 
-  var result = User.getUserByName(username);
+  var result = User.getUserByName(name);
 
   if(typeof result !== 'undefined') {
     res.setHeader('Content-Type', 'application/json');

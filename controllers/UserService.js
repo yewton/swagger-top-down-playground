@@ -26,7 +26,7 @@ exports.createUser = function(body) {
 
   
 }
-exports.getUserByName = function(username) {
+exports.getUserByName = function(name) {
 
   var examples = {};
   

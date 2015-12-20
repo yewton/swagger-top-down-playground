@@ -20,7 +20,7 @@
       "operationId": "getUserByName",
       "parameters": [
         {
-  "name" : "username",
+  "name" : "name",
   "in" : "path",
   "description" : "取得するユーザ名。テストには `user1` を使ってください。",
   "required" : true,
