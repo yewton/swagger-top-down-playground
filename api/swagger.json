@@ -10,6 +10,46 @@
   "basePath": "/api",
   "paths": {
   
+  "/users/{name}": {
+    
+    "get": {
+      "summary": "ユーザの取得",
+      "description":"ユーザを取得します。",
+      "x-swagger-router-controller": "User",
+      "tags": ["User"],
+      "operationId": "getUserByName",
+      "parameters": [
+        {
+  "name" : "username",
+  "in" : "path",
+  "description" : "取得するユーザ名。テストには `user1` を使ってください。",
+  "required" : true,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "成功",
+  "schema" : {
+    "$ref" : "#/definitions/User"
+  }
+}
+        ,
+        "400": {
+  "description" : "無効なユーザ名"
+}
+        ,
+        "404": {
+  "description" : "ユーザが見つからない"
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
   "/users": {
     
     "post": {
@@ -41,10 +81,29 @@
     
   } ,
   
+  "/user/logout": {
+    
+    "get": {
+      "summary": "ログアウト",
+      "description":"現在ログイン中のユーザセッションをログアウトします。",
+      "x-swagger-router-controller": "User",
+      "tags": ["User"],
+      "operationId": "logoutUser",
+      "responses": {
+        "default": {
+  "description" : "成功"
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
   "/user/login": {
     
     "get": {
-      "summary": "システムへのログイン",
+      "summary": "ログイン",
       "description":"ユーザをシステムにログインさせます。",
       "x-swagger-router-controller": "User",
       "tags": ["User"],
@@ -514,59 +573,7 @@
   } 
   
   }, "definitions": {
-  "ApiResponse": {
-  "properties" : {
-    "code" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
-    "type" : {
-      "type" : "string"
-    },
-    "message" : {
-      "type" : "string"
-    }
-  },
-  "description" : "API応答のコンテナ"
-},"User": {
-  "properties" : {
-    "id" : {
-      "type" : "integer",
-      "format" : "int64",
-      "description" : "ID"
-    },
-    "username" : {
-      "type" : "string",
-      "description" : "ユーザ名"
-    },
-    "firstName" : {
-      "type" : "string",
-      "description" : "名前"
-    },
-    "lastName" : {
-      "type" : "string",
-      "description" : "名字"
-    },
-    "email" : {
-      "type" : "string",
-      "description" : "メールアドレス"
-    },
-    "password" : {
-      "type" : "string",
-      "description" : "パスワード"
-    },
-    "phone" : {
-      "type" : "string",
-      "description" : "電話番号"
-    },
-    "userStatus" : {
-      "type" : "integer",
-      "format" : "int32",
-      "description" : "ユーザ状態"
-    }
-  },
-  "description" : "ユーザエンティティ"
-},"Pet": {
+  "Pet": {
   "allOf" : [ {
     "$ref" : "#/definitions/NewPet"
   }, {
@@ -680,6 +687,65 @@
       "type" : "string"
     }
   }
+},"ApiResponse": {
+  "properties" : {
+    "code" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "type" : {
+      "type" : "string"
+    },
+    "message" : {
+      "type" : "string"
+    }
+  },
+  "description" : "API応答のコンテナ"
+},"User": {
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "description" : "ID"
+    },
+    "username" : {
+      "type" : "string",
+      "example" : "user1",
+      "description" : "ユーザ名"
+    },
+    "firstName" : {
+      "type" : "string",
+      "example" : "太郎",
+      "description" : "名前"
+    },
+    "lastName" : {
+      "type" : "string",
+      "example" : "諏訪賀",
+      "description" : "名字"
+    },
+    "email" : {
+      "type" : "string",
+      "example" : "foo@example.com",
+      "description" : "メールアドレス"
+    },
+    "password" : {
+      "type" : "string",
+      "example" : "pa55w0rd",
+      "description" : "パスワード"
+    },
+    "phone" : {
+      "type" : "string",
+      "example" : "+81-90-9999-9999",
+      "description" : "電話番号"
+    },
+    "userStatus" : {
+      "type" : "integer",
+      "format" : "int32",
+      "example" : "1",
+      "description" : "ユーザ状態"
+    }
+  },
+  "description" : "ユーザエンティティ"
 },"inline_response_200": { }
   }
 }
