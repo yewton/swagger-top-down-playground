@@ -12,43 +12,27 @@
   
   "/users": {
     
-    "get": {
-      "summary": "ペットの検索",
-      "description":"hoge",
+    "post": {
+      "summary": "ユーザの作成",
+      "description":"新規ユーザを作成します。",
       "x-swagger-router-controller": "User",
       "tags": ["User"],
-      "operationId": "findUser",
+      "operationId": "createUser",
       "parameters": [
         {
-  "name" : "tags",
-  "in" : "query",
-  "description" : "絞り込むタグ",
-  "required" : false,
-  "type" : "array",
-  "items" : {
-    "type" : "string"
-  },
-  "collectionFormat" : "multi"
-},
-        {
-  "name" : "limit",
-  "in" : "query",
-  "description" : "結果の上限",
-  "required" : false,
-  "type" : "integer",
-  "format" : "int32"
+  "in" : "body",
+  "name" : "body",
+  "description" : "作成するユーザ",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/User"
+  }
 }
         
       ],
       "responses": {
-        "200": {
-  "description" : "ペットエンティティの配列",
-  "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Pet"
-    }
-  }
+        "default": {
+  "description" : "成功"
 }
         
         
@@ -57,6 +41,115 @@
     
   } ,
   
+  "/user/login": {
+    
+    "get": {
+      "summary": "システムへのログイン",
+      "description":"ユーザをシステムにログインさせます。",
+      "x-swagger-router-controller": "User",
+      "tags": ["User"],
+      "operationId": "loginUser",
+      "parameters": [
+        {
+  "name" : "username",
+  "in" : "query",
+  "description" : "ログインユーザ名",
+  "required" : true,
+  "type" : "string"
+},
+        {
+  "name" : "password",
+  "in" : "query",
+  "description" : "ログインパスワード",
+  "required" : true,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "成功",
+  "schema" : {
+    "type" : "string"
+  },
+  "headers" : {
+    "X-Rate-Limit" : {
+      "type" : "integer",
+      "format" : "int32",
+      "description" : "ユーザ毎の最大呼び出し数制限(毎時)"
+    },
+    "X-Expires-After" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "トークンの有効期限(UTC)"
+    }
+  }
+}
+        ,
+        "400": {
+  "description" : "無効なユーザ名、またはパスワード"
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  
+  "/pets/{id}/photos": {
+    
+    "post": {
+      "summary": "ペット写真の追加",
+      "description":"ペットの写真を追加します。",
+      "x-swagger-router-controller": "Pet",
+      "tags": ["Pet"],
+      "operationId": "uploadFile",
+      "parameters": [
+        {
+  "name" : "id",
+  "in" : "path",
+  "description" : "写真を追加するペットのID",
+  "required" : true,
+  "type" : "integer",
+  "format" : "int64"
+},
+        {
+  "name" : "file",
+  "in" : "formData",
+  "description" : "アップロードするファイル",
+  "required" : true,
+  "type" : "file"
+},
+        {
+  "name" : "additionalMetadata",
+  "in" : "formData",
+  "description" : "写真の付加情報",
+  "required" : false,
+  "type" : "string"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "アップロード成功",
+  "schema" : {
+    "$ref" : "#/definitions/ApiResponse"
+  }
+}
+        ,
+        "default": {
+  "description" : "想定外のエラー",
+  "schema" : {
+    "$ref" : "#/definitions/ErrorModel"
+  }
+}
+        
+        
+      }
+    } 
+    
+  } ,
   
   "/pets/{id}": {
     
@@ -74,6 +167,56 @@
   "required" : true,
   "type" : "integer",
   "format" : "int64"
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "ペットエンティティ",
+  "schema" : {
+    "$ref" : "#/definitions/Pet"
+  }
+}
+        ,
+        "default": {
+  "description" : "想定外のエラー",
+  "schema" : {
+    "$ref" : "#/definitions/ErrorModel"
+  }
+}
+        
+        
+      }
+    } ,
+    
+    "post": {
+      "summary": "ペットの更新",
+      "description":"フォームからペット情報を更新します。",
+      "x-swagger-router-controller": "Pet",
+      "tags": ["Pet"],
+      "operationId": "updatePetWithFoorm",
+      "parameters": [
+        {
+  "name" : "id",
+  "in" : "path",
+  "description" : "更新するペットのID",
+  "required" : true,
+  "type" : "integer",
+  "format" : "int64"
+},
+        {
+  "name" : "name",
+  "in" : "formData",
+  "description" : "更新後のペットの名前",
+  "required" : false,
+  "type" : "string"
+},
+        {
+  "name" : "status",
+  "in" : "formData",
+  "description" : "更新後のペットの状態",
+  "required" : false,
+  "type" : "string"
 }
         
       ],
@@ -183,6 +326,48 @@
       }
     } ,
     
+    "put": {
+      "summary": "ペットの更新",
+      "description":"既存のペット情報を更新します。",
+      "x-swagger-router-controller": "Pet",
+      "tags": ["Pet"],
+      "operationId": "updatePet",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "body",
+  "description" : "更新するペットオブジェクト",
+  "required" : true,
+  "schema" : {
+    "$ref" : "#/definitions/Pet"
+  }
+}
+        
+      ],
+      "responses": {
+        "400": {
+  "description" : "無効なIDが与えられた"
+}
+        ,
+        "404": {
+  "description" : "ペットが見つからない"
+}
+        ,
+        "405": {
+  "description" : "バリデーション例外"
+}
+        ,
+        "default": {
+  "description" : "想定外のエラー",
+  "schema" : {
+    "$ref" : "#/definitions/ErrorModel"
+  }
+}
+        
+        
+      }
+    } ,
+    
     "post": {
       "summary": "ペットの追加",
       "description":"店舗にペットを追加します。重複可。",
@@ -192,7 +377,7 @@
       "parameters": [
         {
   "in" : "body",
-  "name" : "pet",
+  "name" : "body",
   "description" : "追加するペットオブジェクト",
   "required" : true,
   "schema" : {
@@ -209,6 +394,10 @@
   }
 }
         ,
+        "405": {
+  "description" : "無効な入力"
+}
+        ,
         "default": {
   "description" : "想定外のエラー",
   "schema" : {
@@ -223,45 +412,99 @@
   } ,
   
   
-  "/store": {
+  "/store/orders/{orderId}": {
     
     "get": {
-      "summary": "ペットの検索",
-      "description":"hoge",
+      "summary": "注文の確認",
+      "description":"ユーザがアクセス可能な全てのペットを返します。\n\n##### Swagger 側デモAPI (http://petstore.swagger.io/) 利用上の注意\n\n正常なレスポンスを取得するには、 **5以上10未満のIDを指定** してください。\n他の値では例外が発生します。",
       "x-swagger-router-controller": "Store",
       "tags": ["Store"],
-      "operationId": "findstore",
+      "operationId": "getOrderById",
       "parameters": [
         {
-  "name" : "tags",
-  "in" : "query",
-  "description" : "絞り込むタグ",
-  "required" : false,
-  "type" : "array",
-  "items" : {
-    "type" : "string"
-  },
-  "collectionFormat" : "multi"
-},
-        {
-  "name" : "limit",
-  "in" : "query",
-  "description" : "結果の上限",
-  "required" : false,
+  "name" : "orderId",
+  "in" : "path",
+  "description" : "取得する注文ID",
+  "required" : true,
   "type" : "integer",
-  "format" : "int32"
+  "format" : "int64"
 }
         
       ],
       "responses": {
         "200": {
-  "description" : "ペットエンティティの配列",
+  "description" : "発注成功",
   "schema" : {
-    "type" : "array",
-    "items" : {
-      "$ref" : "#/definitions/Pet"
-    }
+    "$ref" : "#/definitions/Order"
   }
+}
+        ,
+        "400": {
+  "description" : "無効な注文"
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/store/order": {
+    
+    "post": {
+      "summary": "ペットの発注",
+      "description":"ペットを発注します。",
+      "x-swagger-router-controller": "Store",
+      "tags": ["Store"],
+      "operationId": "placeOrder",
+      "parameters": [
+        {
+  "in" : "body",
+  "name" : "body",
+  "description" : "ペット購入の注文",
+  "required" : false,
+  "schema" : {
+    "$ref" : "#/definitions/Order"
+  }
+}
+        
+      ],
+      "responses": {
+        "200": {
+  "description" : "発注成功",
+  "schema" : {
+    "$ref" : "#/definitions/Order"
+  }
+}
+        ,
+        "400": {
+  "description" : "無効な注文"
+}
+        
+        
+      }
+    } 
+    
+  } ,
+  
+  "/store/inventry": {
+    
+    "get": {
+      "summary": "状況毎の在庫の確認",
+      "description":"在庫状況と数量のマップを返します。",
+      "x-swagger-router-controller": "Store",
+      "tags": ["Store"],
+      "operationId": "getInventry",
+      "responses": {
+        "200": {
+  "description" : "取得成功",
+  "schema" : {
+    "$ref" : "#/definitions/inline_response_200"
+  }
+}
+        ,
+        "400": {
+  "description" : "無効な注文"
 }
         
         
@@ -271,7 +514,59 @@
   } 
   
   }, "definitions": {
-  "Pet": {
+  "ApiResponse": {
+  "properties" : {
+    "code" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "type" : {
+      "type" : "string"
+    },
+    "message" : {
+      "type" : "string"
+    }
+  },
+  "description" : "API応答のコンテナ"
+},"User": {
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "description" : "ID"
+    },
+    "username" : {
+      "type" : "string",
+      "description" : "ユーザ名"
+    },
+    "firstName" : {
+      "type" : "string",
+      "description" : "名前"
+    },
+    "lastName" : {
+      "type" : "string",
+      "description" : "名字"
+    },
+    "email" : {
+      "type" : "string",
+      "description" : "メールアドレス"
+    },
+    "password" : {
+      "type" : "string",
+      "description" : "パスワード"
+    },
+    "phone" : {
+      "type" : "string",
+      "description" : "電話番号"
+    },
+    "userStatus" : {
+      "type" : "integer",
+      "format" : "int32",
+      "description" : "ユーザ状態"
+    }
+  },
+  "description" : "ユーザエンティティ"
+},"Pet": {
   "allOf" : [ {
     "$ref" : "#/definitions/NewPet"
   }, {
@@ -280,26 +575,100 @@
       "id" : {
         "type" : "integer",
         "format" : "int64",
-        "description" : "識別子"
+        "description" : "ID"
       }
     }
   } ]
 },"NewPet": {
   "required" : [ "name" ],
   "properties" : {
+    "category" : {
+      "$ref" : "#/definitions/Category"
+    },
     "name" : {
       "type" : "string",
       "description" : "名前"
     },
-    "colors" : {
+    "photoUrls" : {
       "type" : "array",
-      "description" : "色",
+      "description" : "写真URL",
       "items" : {
         "type" : "string"
       }
+    },
+    "tags" : {
+      "type" : "array",
+      "description" : "タグ",
+      "items" : {
+        "$ref" : "#/definitions/Tag"
+      }
+    },
+    "status" : {
+      "type" : "string",
+      "description" : "店舗におけるペットの状態"
     }
   },
   "description" : "新規ペット"
+},"Tag": {
+  "required" : [ "id" ],
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "description" : "ID"
+    },
+    "name" : {
+      "type" : "string",
+      "description" : "タグ名"
+    }
+  },
+  "description" : "タグエンティティ"
+},"Category": {
+  "required" : [ "id" ],
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "description" : "ID"
+    },
+    "name" : {
+      "type" : "string",
+      "description" : "カテゴリ名"
+    }
+  },
+  "description" : "カテゴリエンティティ"
+},"Order": {
+  "properties" : {
+    "id" : {
+      "type" : "integer",
+      "format" : "int64",
+      "description" : "ID"
+    },
+    "petId" : {
+      "type" : "integer",
+      "format" : "int64",
+      "description" : "ペットID"
+    },
+    "quantity" : {
+      "type" : "integer",
+      "format" : "int32",
+      "description" : "数量"
+    },
+    "shipDate" : {
+      "type" : "string",
+      "format" : "date-time",
+      "description" : "数量"
+    },
+    "status" : {
+      "type" : "string",
+      "description" : "注文状況"
+    },
+    "complete" : {
+      "type" : "boolean",
+      "description" : "完了しているか？"
+    }
+  },
+  "description" : "注文エンティティ"
 },"ErrorModel": {
   "required" : [ "code", "message" ],
   "properties" : {
@@ -311,6 +680,6 @@
       "type" : "string"
     }
   }
-}
+},"inline_response_200": { }
   }
 }

@@ -21,11 +21,25 @@ module.exports.findPets = function findPets (req, res, next) {
     res.end();
 };
 
-module.exports.addPet = function addPet (req, res, next) {
-  var pet = req.swagger.params['pet'].value;
+module.exports.updatePet = function updatePet (req, res, next) {
+  var body = req.swagger.params['body'].value;
   
 
-  var result = Pet.addPet(pet);
+  var result = Pet.updatePet(body);
+
+  if(typeof result !== 'undefined') {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result || {}, null, 2));
+  }
+  else
+    res.end();
+};
+
+module.exports.addPet = function addPet (req, res, next) {
+  var body = req.swagger.params['body'].value;
+  
+
+  var result = Pet.addPet(body);
 
   if(typeof result !== 'undefined') {
     res.setHeader('Content-Type', 'application/json');
@@ -49,11 +63,43 @@ module.exports.findPetById = function findPetById (req, res, next) {
     res.end();
 };
 
+module.exports.updatePetWithFoorm = function updatePetWithFoorm (req, res, next) {
+  var id = req.swagger.params['id'].value;
+  var name = req.swagger.params['name'].value;
+  var status = req.swagger.params['status'].value;
+  
+
+  var result = Pet.updatePetWithFoorm(id, name, status);
+
+  if(typeof result !== 'undefined') {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result || {}, null, 2));
+  }
+  else
+    res.end();
+};
+
 module.exports.deletePet = function deletePet (req, res, next) {
   var id = req.swagger.params['id'].value;
   
 
   var result = Pet.deletePet(id);
+
+  if(typeof result !== 'undefined') {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(result || {}, null, 2));
+  }
+  else
+    res.end();
+};
+
+module.exports.uploadFile = function uploadFile (req, res, next) {
+  var id = req.swagger.params['id'].value;
+  var file = req.swagger.params['file'].value;
+  var additionalMetadata = req.swagger.params['additionalMetadata'].value;
+  
+
+  var result = Pet.uploadFile(id, file, additionalMetadata);
 
   if(typeof result !== 'undefined') {
     res.setHeader('Content-Type', 'application/json');
