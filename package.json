@@ -1,0 +1,15 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "これはペットショップサーバの例です。\n\n[Swaggerについてもっと知る](http://swagger.io)、あるいは irc.freenode.net の IRC チャンネル `#swagger` に参加しましょう。\n\nこの例では、認可フィルタの確認用に `special-key` という API キーを利用できます。\n\n本番環境用の追加の説明文です。",
+  "main": "index.js",
+  "keywords": [
+    "swagger"
+  ],
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "swagger-tools": "0.9.*"
+  }
+}
