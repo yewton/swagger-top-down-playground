@@ -2,11 +2,11 @@
 <html>
 <head>
     <link rel="stylesheet" href="main.css">
-    <title>Swagger☆ペットショップ (本番)</title>
+    <title>Swagger ペットショップ (本番)</title>
 </head>
 <body>
 <div class="container">
-    <h1>Swagger☆ペットショップ (本番)</h1>
+    <h1>Swagger ペットショップ (本番)</h1>
     <p><p>これはペットショップサーバの例です。</p>
     <p><a href="http://swagger.io">Swaggerについてもっと知る</a>、あるいは irc.freenode.net の IRC チャンネル <code>#swagger</code> に参加しましょう。</p>
     <p>この例では、認可フィルタの確認用に <code>special-key</code> という API キーを利用できます。</p>
@@ -31,20 +31,7 @@
         
         <h2 id="swagger--summary-tags">概要</h2>
             <h3 id="tag-pet" class="swagger-summary-tag">タグ: pet</h3>
-            <p>Pets operations</p>
-        
-            <table class="table table-bordered table-condensed swagger--summary">
-                <thead>
-                <tr>
-                    <th>オペレーション</th>
-                    <th>説明</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-            <h3 id="tag-default" class="swagger-summary-tag">タグ: default</h3>
-            <p></p>
+            <p>ペット関連</p>
         
             <table class="table table-bordered table-condensed swagger--summary">
                 <thead>
@@ -56,19 +43,59 @@
                 <tbody>
                     <tr>
                         <td><a href="#operation--pets-get">GET /pets</a></td>
-                        <td></td>
+                        <td><p>ペットの検索</p>
+        </td>
                     </tr>
                     <tr>
                         <td><a href="#operation--pets-post">POST /pets</a></td>
-                        <td></td>
+                        <td><p>ペットの追加</p>
+        </td>
                     </tr>
                     <tr>
                         <td><a href="#operation--pets--id--get">GET /pets/{id}</a></td>
-                        <td></td>
+                        <td><p>ペットの取得</p>
+        </td>
                     </tr>
                     <tr>
                         <td><a href="#operation--pets--id--delete">DELETE /pets/{id}</a></td>
-                        <td></td>
+                        <td><p>ペットの削除</p>
+        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 id="tag-store" class="swagger-summary-tag">タグ: store</h3>
+            <p>店舗関連</p>
+        
+            <table class="table table-bordered table-condensed swagger--summary">
+                <thead>
+                <tr>
+                    <th>オペレーション</th>
+                    <th>説明</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#operation--store-get">GET /store</a></td>
+                        <td><p>ペットの検索</p>
+        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 id="tag-user" class="swagger-summary-tag">タグ: user</h3>
+            <p>ユーザ関連</p>
+        
+            <table class="table table-bordered table-condensed swagger--summary">
+                <thead>
+                <tr>
+                    <th>オペレーション</th>
+                    <th>説明</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="#operation--users-get">GET /users</a></td>
+                        <td><p>ペットの検索</p>
+        </td>
                     </tr>
                 </tbody>
             </table>
@@ -83,6 +110,10 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-security-properties">
+                            <dt>
+                                    <span class="security-property-name">description:</span>
+                                    <span class="security-property-type">共通鍵による認証を提供します</span>
+                            </dt>
                             <dt>
                             </dt>
                             <dt>
@@ -102,6 +133,10 @@
                 </div>
                 <div class="panel-body">
                     <section class="sw-security-properties">
+                            <dt>
+                                    <span class="security-property-name">description:</span>
+                                    <span class="security-property-type">OAuth 2.0による認可を提供します</span>
+                            </dt>
                             <dt>
                             </dt>
                             <dt>
@@ -126,7 +161,7 @@
         <span id="path--pets"></span>
             <div id="operation--pets-get" class="swagger--panel-operation-get panel">
                 <div class="panel-heading">
-                    <div class="operation-summary"></div>
+                    <div class="operation-summary">&#x30DA;&#x30C3;&#x30C8;&#x306E;&#x691C;&#x7D22;</div>
                     <h3 class="panel-title">
                         <span class="operation-name">GET</span>
                         <span class="operation-path-prefix">
@@ -134,10 +169,14 @@
                         </span>
                         <strong>/pets</strong>
                     </h3>
+                        タグ:
+                            <a href="#tag-pet">pet</a>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>Returns <strong>all</strong> pets from the system that the user has access to.</p>
+                        <p>ユーザがアクセス可能な全てのペットを返します。</p>
+            <h5 id="-">注意</h5>
+            <p>タグによる絞り込みしかサポートしていません。</p>
             
                     </section>
                     
@@ -155,7 +194,7 @@
                                 <tbody>
                                         <tr>
                                             <td><code>tags</code></td>
-                                            <td><p>tags to filter by</p>
+                                            <td><p>絞り込むタグ</p>
                                         </td>
                                             <td>query</td>
                                             <td><span class="json-property-type">string[]</span>
@@ -169,7 +208,7 @@
                                         </tr>
                                         <tr>
                                             <td><code>limit</code></td>
-                                            <td><p>maximum number of results to return</p>
+                                            <td><p>結果の上限</p>
                                         </td>
                                             <td>query</td>
                                             <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
@@ -184,9 +223,10 @@
                         </section>
                     
                         <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> <span class="label label-default">application/xml</span> <span class="label label-default">text/xml</span> <span class="label label-default">text/html</span> 
-                    </p>
-                    
+                                <p><a href="#sw-default-produces">デフォルトのContent-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
                             <dl>
                                     <dt class="sw-response-200">
                                         200 OK
@@ -195,7 +235,7 @@
                                     <dd class="sw-response-200">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>pet response</p>
+                                                    <p>ペットエンティティの配列</p>
                                             
                                                 </div>
                                             </div>
@@ -225,7 +265,7 @@
                                     <dd class="sw-response-default">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>unexpected error</p>
+                                                    <p>想定外のエラー</p>
                                             
                                                 </div>
                                             </div>
@@ -246,7 +286,7 @@
             </div>
             <div id="operation--pets-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
-                    <div class="operation-summary"></div>
+                    <div class="operation-summary">&#x30DA;&#x30C3;&#x30C8;&#x306E;&#x8FFD;&#x52A0;</div>
                     <h3 class="panel-title">
                         <span class="operation-name">POST</span>
                         <span class="operation-path-prefix">
@@ -254,10 +294,12 @@
                         </span>
                         <strong>/pets</strong>
                     </h3>
+                        タグ:
+                            <a href="#tag-pet">pet</a>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>Creates a new pet in the store.  Duplicates are allowed</p>
+                        <p>店舗にペットを追加します。重複可。</p>
             
                     </section>
                         
@@ -268,7 +310,7 @@
                                     </p>
                                                 <div class="row">
                                             <div class="col-md-6">
-                                                <p><p>Pet to add to the store</p>
+                                                <p><p>追加するペットオブジェクト</p>
                         </p>
                                             </div>
                                             <div class="col-md-6 sw-request-model">
@@ -293,7 +335,7 @@
                                     <dd class="sw-response-200">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>pet response</p>
+                                                    <p>追加されたペットエンティティ</p>
                                             
                                                 </div>
                                             </div>
@@ -315,7 +357,7 @@
                                     <dd class="sw-response-default">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>unexpected error</p>
+                                                    <p>想定外のエラー</p>
                                             
                                                 </div>
                                             </div>
@@ -332,13 +374,37 @@
                                     </dd>
                             </dl>
                         </section>
+                        <section class="sw-request-security">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-request-security-schema"></th>
+                                    <th class="sw-request-security-scopes"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><a href="#security-definition-api_key">api_key</a></td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="#security-definition-petstore_auth">petstore_auth</a></td>
+                                            <td>
+                                                    read:pets
+                                                    , write:pets
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
                 </div>
             </div>
         
         <span id="path--pets--id-"></span>
             <div id="operation--pets--id--delete" class="swagger--panel-operation-delete panel">
                 <div class="panel-heading">
-                    <div class="operation-summary"></div>
+                    <div class="operation-summary">&#x30DA;&#x30C3;&#x30C8;&#x306E;&#x524A;&#x9664;</div>
                     <h3 class="panel-title">
                         <span class="operation-name">DELETE</span>
                         <span class="operation-path-prefix">
@@ -346,10 +412,12 @@
                         </span>
                         <strong>/pets/{id}</strong>
                     </h3>
+                        タグ:
+                            <a href="#tag-pet">pet</a>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>deletes a single pet based on the ID supplied</p>
+                        <p>指定されたIDを持つペットエンティティを削除します。</p>
             
                     </section>
                     
@@ -413,7 +481,7 @@
                                     <dd class="sw-response-default">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>unexpected error</p>
+                                                    <p>想定外のエラー</p>
                                             
                                                 </div>
                                             </div>
@@ -434,7 +502,7 @@
             </div>
             <div id="operation--pets--id--get" class="swagger--panel-operation-get panel">
                 <div class="panel-heading">
-                    <div class="operation-summary"></div>
+                    <div class="operation-summary">&#x30DA;&#x30C3;&#x30C8;&#x306E;&#x53D6;&#x5F97;</div>
                     <h3 class="panel-title">
                         <span class="operation-name">GET</span>
                         <span class="operation-path-prefix">
@@ -442,10 +510,12 @@
                         </span>
                         <strong>/pets/{id}</strong>
                     </h3>
+                        タグ:
+                            <a href="#tag-pet">pet</a>
                 </div>
                 <div class="panel-body">
                     <section class="sw-operation-description">
-                        <p>Returns a user based on a single ID, if the user does not have access to the pet</p>
+                        <p>指定されたIDを持つペットエンティティを返します。</p>
             
                     </section>
                     
@@ -463,7 +533,7 @@
                                 <tbody>
                                         <tr>
                                             <td><code>id</code></td>
-                                            <td><p>ID of pet to fetch</p>
+                                            <td><p>取得するペットのID</p>
                                         </td>
                                             <td>path</td>
                                             <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int64)</span>
@@ -479,9 +549,10 @@
                         </section>
                     
                         <section class="sw-responses">
-                                <p><span class="label label-default">application/json</span> <span class="label label-default">application/xml</span> <span class="label label-default">text/xml</span> <span class="label label-default">text/html</span> 
-                    </p>
-                    
+                                <p><a href="#sw-default-produces">デフォルトのContent-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
                             <dl>
                                     <dt class="sw-response-200">
                                         200 OK
@@ -490,7 +561,7 @@
                                     <dd class="sw-response-200">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>pet response</p>
+                                                    <p>ペットエンティティ</p>
                                             
                                                 </div>
                                             </div>
@@ -512,7 +583,7 @@
                                     <dd class="sw-response-default">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <p>unexpected error</p>
+                                                    <p>想定外のエラー</p>
                                             
                                                 </div>
                                             </div>
@@ -546,12 +617,217 @@
                                         <tr>
                                             <td><a href="#security-definition-petstore_auth">petstore_auth</a></td>
                                             <td>
-                                                    write:pets
-                                                    , read:pets
+                                                    read:pets
                                             </td>
                                         </tr>
                                 </tbody>
                             </table>
+                        </section>
+                </div>
+            </div>
+        
+        <span id="path--store"></span>
+            <div id="operation--store-get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">&#x30DA;&#x30C3;&#x30C8;&#x306E;&#x691C;&#x7D22;</div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">GET</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/store</strong>
+                    </h3>
+                        タグ:
+                            <a href="#tag-store">store</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>hoge</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><code>tags</code></td>
+                                            <td><p>絞り込むタグ</p>
+                                        </td>
+                                            <td>query</td>
+                                            <td><span class="json-property-type">string[]</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                        <span class="sw-param-collection-format">, 
+                                                        comma separated (<code>tags=aaa,bbb</code>)
+                                                    </span>    </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>limit</code></td>
+                                            <td><p>結果の上限</p>
+                                        </td>
+                                            <td>query</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">デフォルトのContent-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>ペットエンティティの配列</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                            
+                                                                            <section class="json-schema-array-items">
+                                                                                <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Pet">Pet</a>
+                                                                                </span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                                <div class="json-inner-schema">
+                                                                                    
+                                                                                </div>
+                                                                            </section>    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+        
+        <span id="path--users"></span>
+            <div id="operation--users-get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">&#x30DA;&#x30C3;&#x30C8;&#x306E;&#x691C;&#x7D22;</div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">GET</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/users</strong>
+                    </h3>
+                        タグ:
+                            <a href="#tag-user">user</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>hoge</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><code>tags</code></td>
+                                            <td><p>絞り込むタグ</p>
+                                        </td>
+                                            <td>query</td>
+                                            <td><span class="json-property-type">string[]</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                        <span class="sw-param-collection-format">, 
+                                                        comma separated (<code>tags=aaa,bbb</code>)
+                                                    </span>    </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><code>limit</code></td>
+                                            <td><p>結果の上限</p>
+                                        </td>
+                                            <td>query</td>
+                                            <td><span class="json-property-type">integer</span>    <span class="json-property-format">(int32)</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">デフォルトのContent-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>ペットエンティティの配列</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                            
+                                                                            <section class="json-schema-array-items">
+                                                                                <span class="json-property-type">    <a class="json-schema-ref" href="#/definitions/Pet">Pet</a>
+                                                                                </span>
+                                                                                <span class="json-property-range" title="Value limits"></span>
+                                                                                
+                                                                                <div class="json-inner-schema">
+                                                                                    
+                                                                                </div>
+                                                                            </section>    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
                         </section>
                 </div>
             </div>
