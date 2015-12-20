@@ -124,7 +124,17 @@
                     </tr>
                     <tr>
                         <td><a href="#operation--user-login-get">GET /user/login</a></td>
-                        <td><p>システムへのログイン</p>
+                        <td><p>ログイン</p>
+        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--user-logout-get">GET /user/logout</a></td>
+                        <td><p>ログアウト</p>
+        </td>
+                    </tr>
+                    <tr>
+                        <td><a href="#operation--users--name--get">GET /users/{name}</a></td>
+                        <td><p>ユーザの取得</p>
         </td>
                     </tr>
                 </tbody>
@@ -1407,7 +1417,7 @@
         <span id="path--user-login"></span>
             <div id="operation--user-login-get" class="swagger--panel-operation-get panel">
                 <div class="panel-heading">
-                    <div class="operation-summary">&#x30B7;&#x30B9;&#x30C6;&#x30E0;&#x3078;&#x306E;&#x30ED;&#x30B0;&#x30A4;&#x30F3;</div>
+                    <div class="operation-summary">&#x30ED;&#x30B0;&#x30A4;&#x30F3;</div>
                     <h3 class="panel-title">
                         <span class="operation-name">GET</span>
                         <span class="operation-path-prefix">
@@ -1554,6 +1564,56 @@
                 </div>
             </div>
         
+        <span id="path--user-logout"></span>
+            <div id="operation--user-logout-get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">&#x30ED;&#x30B0;&#x30A2;&#x30A6;&#x30C8;</div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">GET</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/user/logout</strong>
+                    </h3>
+                        タグ:
+                            <a href="#tag-user">user</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>現在ログイン中のユーザセッションをログアウトします。</p>
+            
+                    </section>
+                    
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">デフォルトのContent-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-default">
+                                        default 
+                                    
+                                    </dt>
+                                    <dd class="sw-response-default">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>成功</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+        
         <span id="path--users"></span>
             <div id="operation--users-post" class="swagger--panel-operation-post panel">
                 <div class="panel-heading">
@@ -1608,6 +1668,124 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <p>成功</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>
+                                    </dd>
+                            </dl>
+                        </section>
+                </div>
+            </div>
+        
+        <span id="path--users--name-"></span>
+            <div id="operation--users--name--get" class="swagger--panel-operation-get panel">
+                <div class="panel-heading">
+                    <div class="operation-summary">&#x30E6;&#x30FC;&#x30B6;&#x306E;&#x53D6;&#x5F97;</div>
+                    <h3 class="panel-title">
+                        <span class="operation-name">GET</span>
+                        <span class="operation-path-prefix">
+                            http://petstore.swagger.io/api
+                        </span>
+                        <strong>/users/{name}</strong>
+                    </h3>
+                        タグ:
+                            <a href="#tag-user">user</a>
+                </div>
+                <div class="panel-body">
+                    <section class="sw-operation-description">
+                        <p>ユーザを取得します。</p>
+            
+                    </section>
+                    
+                        <section class="sw-request-params">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th class="sw-param-name"></th>
+                                    <th class="sw-param-description"></th>
+                                    <th class="sw-param-type"></th>
+                                    <th class="sw-param-data-type"></th>
+                                    <th class="sw-param-annotation"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                        <tr>
+                                            <td><code>username</code></td>
+                                            <td><p>取得するユーザ名。テストには <code>user1</code> を使ってください。</p>
+                                        </td>
+                                            <td>path</td>
+                                            <td><span class="json-property-type">string</span>
+                                        <span class="json-property-range" title="Value limits"></span>
+                                        
+                                            </td>
+                                            <td>
+                                                    <span class="json-property-required"></span>
+                                            </td>
+                                        </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    
+                        <section class="sw-responses">
+                                <p><a href="#sw-default-produces">デフォルトのContent-Type: </a>
+                                    <span class="label label-default">application/json</span> 
+                                </p>
+                            
+                            <dl>
+                                    <dt class="sw-response-200">
+                                        200 OK
+                                    
+                                    </dt>
+                                    <dd class="sw-response-200">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>成功</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                                <div  class="panel panel-definition">
+                                                    <div class="panel-body">
+                                                                <a class="json-schema-ref" href="#/definitions/User">User</a>
+                                                    </div>
+                                                </div></div>
+                                            
+                                            </div>
+                                    </dd>
+                                    <dt class="sw-response-400">
+                                        400 Bad Request
+                                    
+                                    </dt>
+                                    <dd class="sw-response-400">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>無効なユーザ名</p>
+                                            
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                
+                                                <div class="col-md-6 sw-response-model">
+                                            </div>
+                                            
+                                            </div>
+                                    </dd>
+                                    <dt class="sw-response-404">
+                                        404 Not Found
+                                    
+                                    </dt>
+                                    <dd class="sw-response-404">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <p>ユーザが見つからない</p>
                                             
                                                 </div>
                                             </div>
@@ -2111,6 +2289,11 @@
                                                     <p>ユーザ名</p>
                                     
                                                     <div class="json-inner-schema">
+                                                            <section class="json-schema-example">
+                                                                <pre><code class="lang-json"><span class="hljs-string">&quot;user1&quot;</span>
+                                                        </code></pre>
+                                                        
+                                                            </section>
                                                         
                                                     </div>
                                                 </dd>
@@ -2124,6 +2307,11 @@
                                                     <p>名前</p>
                                     
                                                     <div class="json-inner-schema">
+                                                            <section class="json-schema-example">
+                                                                <pre><code class="lang-json"><span class="hljs-string">&quot;&#x592A;&#x90CE;&quot;</span>
+                                                        </code></pre>
+                                                        
+                                                            </section>
                                                         
                                                     </div>
                                                 </dd>
@@ -2137,6 +2325,11 @@
                                                     <p>名字</p>
                                     
                                                     <div class="json-inner-schema">
+                                                            <section class="json-schema-example">
+                                                                <pre><code class="lang-json"><span class="hljs-string">&quot;&#x8ACF;&#x8A2A;&#x8CC0;&quot;</span>
+                                                        </code></pre>
+                                                        
+                                                            </section>
                                                         
                                                     </div>
                                                 </dd>
@@ -2150,6 +2343,11 @@
                                                     <p>メールアドレス</p>
                                     
                                                     <div class="json-inner-schema">
+                                                            <section class="json-schema-example">
+                                                                <pre><code class="lang-json"><span class="hljs-string">&quot;foo@example.com&quot;</span>
+                                                        </code></pre>
+                                                        
+                                                            </section>
                                                         
                                                     </div>
                                                 </dd>
@@ -2163,6 +2361,11 @@
                                                     <p>パスワード</p>
                                     
                                                     <div class="json-inner-schema">
+                                                            <section class="json-schema-example">
+                                                                <pre><code class="lang-json"><span class="hljs-string">&quot;pa55w0rd&quot;</span>
+                                                        </code></pre>
+                                                        
+                                                            </section>
                                                         
                                                     </div>
                                                 </dd>
@@ -2176,6 +2379,11 @@
                                                     <p>電話番号</p>
                                     
                                                     <div class="json-inner-schema">
+                                                            <section class="json-schema-example">
+                                                                <pre><code class="lang-json"><span class="hljs-string">&quot;+81-90-9999-9999&quot;</span>
+                                                        </code></pre>
+                                                        
+                                                            </section>
                                                         
                                                     </div>
                                                 </dd>
@@ -2189,6 +2397,11 @@
                                                     <p>ユーザ状態</p>
                                     
                                                     <div class="json-inner-schema">
+                                                            <section class="json-schema-example">
+                                                                <pre><code class="lang-json"><span class="hljs-number">1</span>
+                                                        </code></pre>
+                                                        
+                                                            </section>
                                                         
                                                     </div>
                                                 </dd>
